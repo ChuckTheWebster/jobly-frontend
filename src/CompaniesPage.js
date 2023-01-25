@@ -22,7 +22,7 @@ function CompaniesPage() {
 
   useEffect(function fetchCompaniesOnMount() {
     fetchCompanies()
-  }, [])
+  }, []);
 
   async function fetchCompanies(searchTerm) {
     const companiesData = await JoblyApi.getCompanies(searchTerm);
