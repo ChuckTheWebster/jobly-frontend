@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 /** Card displaying company information
  *
@@ -11,11 +12,14 @@ import React from 'react'
 
 function CompanyCard({ company }) {
   return (
-    <div>
-      <h2>{company.name}</h2>
-      <p>{company.description}</p>
+    <div className='CompanyCard'>
+      <Link to={`${company.handle}`}>
+        <h2>{company.name}</h2>
+        <p>{company.description}</p>
+        <img src={company.logoUrl} alt={company.name}/>
+      </Link>
     </div>
-  )
+  );
 }
 
-export default CompanyCard
+export default CompanyCard;
