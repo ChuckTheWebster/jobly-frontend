@@ -4,7 +4,7 @@ import React from 'react'
  *
  * Props:
  * -job: Object with job information
- *    { id, title, salary, equity, companyHandle, companyName }
+ *    { id, title, salary, equity, companyName }
  *
  * JobList -> JobCard
  */

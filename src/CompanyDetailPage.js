@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import JobList from './JobList';
-import { useParams, useNavigate } from 'react-router-dom';
-import JoblyApi from './helpers/api';
+import React, { useEffect, useState } from "react";
+import JobList from "./JobList";
+import { useParams } from "react-router-dom";
+import JoblyApi from "./helpers/api";
 
 /** Detail page for a company
  *
@@ -18,36 +18,34 @@ import JoblyApi from './helpers/api';
 function CompanyDetailPage() {
   const [company, setCompany] = useState({
     data: null,
-    isLoading: true
+    isLoading: true,
   });
 
-  const navigate = useNavigate();
   const { handle } = useParams();
 
   useEffect(function fetchCompanyOnMount() {
     async function fetchCompany() {
-      const companyData = await JoblyApi.getCompany(handle);
-      if (companyData) {
-        setCompany({
-          data: companyData,
-          isLoading: false
-        });
-      } else {
-        setCompany({
-          data: null,
-          isLoading: false
-        })
-        navigate('/');
+      let companyFromAPI;
+      try {
+        companyFromAPI = await JoblyApi.getCompany(handle);
+      } catch (err) {
+        console.error(err);
+        companyFromAPI = null;
       }
+      setCompany({
+        data: companyFromAPI,
+        isLoading: false
+      })
     }
 
     fetchCompany();
-  }, []);
+  }, [handle]);
 
   if (company.isLoading) return <i>Loading...</i>;
+  if (company.data === null) return <i>Company not found...</i>;
 
   return (
-    <div className='CompanyDetailPage'>
+    <div className="CompanyDetailPage">
       <h2>{company.data.name}</h2>
       <p>{company.data.description}</p>
       <JobList jobs={company.data.jobs} />

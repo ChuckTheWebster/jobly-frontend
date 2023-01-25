@@ -47,12 +47,8 @@ class JoblyApi {
   /** Get details on a company by handle. */
 
   static async getCompany(handle) {
-    try {
-      const response = await this.request(`companies/${handle}`);
-      return response.company;
-    } catch (err) {
-      return;
-    }
+    const response = await this.request(`companies/${handle}`);
+    return response.company;
   }
 
   /** Get list of all jobs data */

@@ -25,14 +25,21 @@ function JobsPage() {
   }, []);
 
   async function fetchJobs(searchTerm) {
-    const jobsData = await JoblyApi.getJobs(searchTerm);
+    let jobsFromAPI;
+    try{
+      jobsFromAPI = await JoblyApi.getJobs(searchTerm);
+    } catch (err) {
+      console.error(err);
+      jobsFromAPI = null;
+    }
     setJobs({
-      data: [...jobsData],
+      data: jobsFromAPI ? [...jobsFromAPI] : null,
       isLoading: false
     });
   }
 
   if (jobs.isLoading) return <i>Loading...</i>;
+  if (jobs.data === null) return <i>Error retrieving Jobs...</i>
 
   return (
     <div className='JobsPage'>

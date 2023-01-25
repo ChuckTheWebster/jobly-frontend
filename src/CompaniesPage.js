@@ -25,14 +25,21 @@ function CompaniesPage() {
   }, []);
 
   async function fetchCompanies(searchTerm) {
-    const companiesData = await JoblyApi.getCompanies(searchTerm);
+    let companiesFromAPI;
+    try {
+      companiesFromAPI = await JoblyApi.getCompanies(searchTerm);
+    } catch (err) {
+      console.error(err);
+      companiesFromAPI = null;
+    }
     setCompanies({
-      data: [...companiesData],
+      data: companiesFromAPI ? [...companiesFromAPI] : null,
       isLoading: false
     });
   }
 
   if (companies.isLoading) return <i>Loading...</i>;
+  if (companies.data === null) return <i>Error retrieving companies.</i>
 
   return (
     <div className='CompaniesPage'>
