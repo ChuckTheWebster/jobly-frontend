@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import ErrorList from "./ErrorList";
 
 /** Form with customizable prompts and submit.
  *
@@ -33,7 +34,7 @@ function UserForm({ prompts, submit }) {
   }
 
   /** Call parent function and clear form. */
-  function handleSubmit(evt) {
+  async function handleSubmit(evt) {
     evt.preventDefault();
     const errors = generateInputErrors(); // [errors, ...] []
 
@@ -43,10 +44,22 @@ function UserForm({ prompts, submit }) {
         ...prevFormData,
         errors: errors
       }));
-    } else {
-      submit(formData); // TODO: Do the try catch here first.
-      setFormData(initialFormState);
+
+      return;
     }
+
+    try {
+      await submit(formData);
+    } catch (err) {
+      setFormData(prevFormData => ({
+        ...prevFormData,
+        errors: err
+      }));
+
+      return;
+    }
+
+    setFormData(initialFormState);
   }
 
   /** Check for empty inputs and generate a list of error messages */
@@ -74,13 +87,8 @@ function UserForm({ prompts, submit }) {
         ))}
         <button>Submit</button>
       </form>
-      <div>
-        {formData.errors.map(e => (
-          <p key={`Error: ${e}`}>
-            {e}
-          </p>
-        ))}
-      </div>
+
+      <ErrorList errors={formData.errors}/>
     </>
   );
 }

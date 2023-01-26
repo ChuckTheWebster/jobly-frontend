@@ -68,33 +68,14 @@ function App() {
   );
 
   /** Register a user using the API and store the returned token */
-  // TODO: Would put some error validation messages here to be displayed in
-  // signup page
   async function signup(signupFormData) {
-    let tokenFromAPI;
-
-    try {
-      tokenFromAPI = await JoblyApi.signupUser(signupFormData);
-    } catch (err) {
-      console.error(err);
-      return;
-    }
-
+    const tokenFromAPI = await JoblyApi.signupUser(signupFormData);
     storeToken(tokenFromAPI);
   }
 
   /** Authenticate a user using the API and store the returned token */
-  // TODO: Would put some error validation messages here to be displayed in
-  // login page
   async function login(loginFormData) {
-    let tokenFromAPI;
-
-    try {
-      tokenFromAPI = await JoblyApi.loginUser(loginFormData);
-    } catch (err) {
-      console.error(err);
-    }
-
+    const tokenFromAPI = await JoblyApi.loginUser(loginFormData);
     storeToken(tokenFromAPI);
   }
 
