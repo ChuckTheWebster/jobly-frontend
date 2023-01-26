@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import ErrorList from './ErrorList';
+import MessageList from './MessageList';
 import userContext from './userContext';
 
 /** User profile page with edit form
@@ -97,7 +97,7 @@ function ProfilePage() {
 
         <button>Edit User</button>
       </form>
-      <ErrorList errors={formData.messages} />
+      <MessageList messages={formData.messages} />
     </div>
 
   );

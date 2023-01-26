@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import ErrorList from "./ErrorList";
+import MessageList from "./MessageList";
 
 /** Form with customizable prompts and submit.
  *
  * State:
  * - formData: object of form input name: value pairs
- *    -errors: Array of string error messages to display
+ *    -messages: Array of string error messages to display
  *
  * Props:
  * - prompts: an array of objects as prompts for inputs
@@ -16,7 +16,7 @@ import ErrorList from "./ErrorList";
  */
 
 function UserForm({ prompts, submit }) {
-  let initialFormState = { errors: [] };
+  let initialFormState = { messages: [] };
 
   for (let prompt of prompts) {
     initialFormState[prompt.name] = '';
@@ -42,7 +42,7 @@ function UserForm({ prompts, submit }) {
     if (errors.length > 0) {
       setFormData(prevFormData => ({
         ...prevFormData,
-        errors: errors
+        messages: errors
       }));
 
       return;
@@ -53,7 +53,7 @@ function UserForm({ prompts, submit }) {
     } catch (err) {
       setFormData(prevFormData => ({
         ...prevFormData,
-        errors: err
+        messages: err
       }));
 
       return;
@@ -88,7 +88,7 @@ function UserForm({ prompts, submit }) {
         <button>Submit</button>
       </form>
 
-      <ErrorList errors={formData.errors}/>
+      <MessageList messages={formData.messages}/>
     </>
   );
 }

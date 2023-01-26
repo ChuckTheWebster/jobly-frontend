@@ -67,6 +67,18 @@ function App() {
     [token]
   );
 
+  // On token change, add/remove token to/from local storage.
+  useEffect(
+    function updateTokenInLocalStorage() {
+      if (token === null) {
+        localStorage.removeItem(LOCALSTORAGE_TOKEN_KEY);
+      } else {
+        localStorage.setItem(LOCALSTORAGE_TOKEN_KEY, token);
+      }
+    },
+    [token]
+  );
+
   /** Register a user using the API and store the returned token */
   async function signup(signupFormData) {
     const tokenFromAPI = await JoblyApi.signupUser(signupFormData);
@@ -83,28 +95,26 @@ function App() {
   function logout() {
     JoblyApi.token = null;
     setToken(null);
-    localStorage.removeItem(LOCALSTORAGE_TOKEN_KEY); // TODO: Could move this to useEffect
   }
 
   /** Stores a token in the JoblyApi class, state, and localStorage */
   function storeToken(newToken) {
     JoblyApi.token = newToken;
     setToken(newToken);
-    localStorage.setItem(LOCALSTORAGE_TOKEN_KEY, newToken);
   }
 
   /** Save user edits using the API and update user state */
   async function saveUserEdit(editFormData) {
     const { username, ...updateData } = editFormData;
     const userFromAPI = await JoblyApi.updateUser(username, updateData);
-    setUser(prevUser => ({
+    setUser((prevUser) => ({
       ...prevUser,
       data: {
         ...prevUser.data,
         firstName: userFromAPI.firstName,
         lastName: userFromAPI.lastName,
-        email: userFromAPI.email
-      }
+        email: userFromAPI.email,
+      },
     }));
   }
 
