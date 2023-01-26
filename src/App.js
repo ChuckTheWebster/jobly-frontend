@@ -1,47 +1,57 @@
-import './App.css';
-import Nav from './Nav';
-import RoutesList from './RoutesList';
-import { BrowserRouter, Navigate } from 'react-router-dom';
-import JoblyApi from './helpers/api';
-import { useEffect, useState } from 'react';
-import decode from 'jwt-decode';
+import "./App.css";
+import Nav from "./Nav";
+import RoutesList from "./RoutesList";
+import { BrowserRouter, Navigate } from "react-router-dom";
+import JoblyApi from "./helpers/api";
+import { useEffect, useState } from "react";
+import decode from "jwt-decode";
 
-import userContext from './userContext';
+import userContext from "./userContext";
 
 const DEFAULT_USER_STATE = {
   data: null,
-  isLoggedIn: false
+  isLoggedIn: false,
 };
 
-const LOCALSTORAGE_TOKEN_KEY = 'jobly-token';
+const LOCALSTORAGE_TOKEN_KEY = "jobly-token";
 
 function App() {
   const [user, setUser] = useState(DEFAULT_USER_STATE);
   const [token, setToken] = useState(null);
 
-  useEffect(function updateUserOnTokenChange() {
-    if (token === null) {
-      setUser(DEFAULT_USER_STATE);
-      return;
+  useEffect(function checkForTokenOnMount() {
+    const tokenFromLocalStorage = localStorage.getItem(LOCALSTORAGE_TOKEN_KEY);
+    if (tokenFromLocalStorage) {
+      storeToken(tokenFromLocalStorage);
     }
+  }, []);
 
-    fetchUserInformation();
-  }, [token]);
+  useEffect(
+    function updateUserOnTokenChange() {
+      if (token === null) {
+        setUser(DEFAULT_USER_STATE);
+        return;
+      }
 
-  async function fetchUserInformation() {
-    const { username } = decode(token);
+      async function fetchAndSetUserInformation() {
+        const { username } = decode(token);
 
-    let userFromAPI;
-    try {
-      userFromAPI = await JoblyApi.getUser(username);
-    } catch (err) {
-      console.error(err);
-    }
-    setUser({
-      data: userFromAPI,
-      isLoggedIn: true
-    });
-  }
+        let userFromAPI;
+        try {
+          userFromAPI = await JoblyApi.getUser(username);
+        } catch (err) {
+          console.error(err);
+        }
+        setUser({
+          data: userFromAPI,
+          isLoggedIn: true,
+        });
+      }
+
+      fetchAndSetUserInformation();
+    },
+    [token]
+  );
 
   async function signup(signupFormData) {
     let tokenFromAPI;
@@ -68,10 +78,10 @@ function App() {
     storeToken(tokenFromAPI);
   }
 
-  function storeToken(token) {
-    JoblyApi.token = token;
-    setToken(token);
-    localStorage.setItem(LOCALSTORAGE_TOKEN_KEY, token);
+  function storeToken(newToken) {
+    JoblyApi.token = newToken;
+    setToken(newToken);
+    localStorage.setItem(LOCALSTORAGE_TOKEN_KEY, newToken);
   }
 
   function removeToken() {
