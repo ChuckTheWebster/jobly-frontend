@@ -93,9 +93,24 @@ function App() {
     localStorage.setItem(LOCALSTORAGE_TOKEN_KEY, newToken);
   }
 
+  /** Save user edits using the API and update user state */
+  async function saveUserEdit(editFormData) {
+    const { username, ...updateData } = editFormData;
+    const userFromAPI = await JoblyApi.updateUser(username, updateData);
+    setUser(prevUser => ({
+      ...prevUser,
+      data: {
+        ...prevUser.data,
+        firstName: userFromAPI.firstName,
+        lastName: userFromAPI.lastName,
+        email: userFromAPI.email
+      }
+    }));
+  }
+
   return (
     <div className="App">
-      <userContext.Provider value={{ user }}>
+      <userContext.Provider value={{ user, saveUserEdit }}>
         <BrowserRouter>
           <Nav logout={logout} />
           <RoutesList signup={signup} login={login} />
