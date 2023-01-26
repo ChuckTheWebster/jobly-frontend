@@ -4,6 +4,7 @@ import React, { useState } from "react";
  *
  * State:
  * - formData: object of form input name: value pairs
+ *    -errors: Array of string error messages to display
  *
  * Props:
  * - prompts: an array of objects as prompts for inputs
@@ -14,7 +15,7 @@ import React, { useState } from "react";
  */
 
 function UserForm({ prompts, submit }) {
-  let initialFormState = {}
+  let initialFormState = { errors: [] };
 
   for (let prompt of prompts) {
     initialFormState[prompt.name] = '';
@@ -34,26 +35,52 @@ function UserForm({ prompts, submit }) {
   /** Call parent function and clear form. */
   function handleSubmit(evt) {
     evt.preventDefault();
-    submit(formData);
-    setFormData(initialFormState);
+    const errors = generateInputErrors(); // [errors, ...] []
+
+    // Check for input errors (i.e. empty input)
+    if (errors.length > 0) {
+      setFormData(prevFormData => ({
+        ...prevFormData,
+        errors: errors
+      }));
+    } else {
+      submit(formData);
+      setFormData(initialFormState);
+    }
+  }
+
+  /** Check for empty inputs and generate a list of error messages */
+  function generateInputErrors() {
+    const errors = prompts
+      .filter(prompt => formData[prompt.name] === '')
+      .map(prompt => `${prompt.label} is a required input.`);
+    return errors;
   }
 
   return (
-    <form className="Prompts" onSubmit={handleSubmit}>
-      {prompts.map((p, i) => (
-        <div key={i}>
-          <label htmlFor={p.name}>{p.label}</label>
-          <input
-            id={p.name}
-            name={p.name}
-            onChange={handleChange}
-            value={formData[p.name]}
-          />
-        </div>
-      ))}
-
-      <button>Submit</button>
-    </form>
+    <>
+      <form className="Prompts" onSubmit={handleSubmit}>
+        {prompts.map((p, i) => (
+          <div key={i}>
+            <label htmlFor={p.name}>{p.label}</label>
+            <input
+              id={p.name}
+              name={p.name}
+              onChange={handleChange}
+              value={formData[p.name]}
+            />
+          </div>
+        ))}
+        <button>Submit</button>
+      </form>
+      <div>
+        {formData.errors.map(e => (
+          <p key={`Error: ${e}`}>
+            {e}
+          </p>
+        ))}
+      </div>
+    </>
   );
 }
 
