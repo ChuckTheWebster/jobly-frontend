@@ -5,6 +5,7 @@ import { BrowserRouter } from "react-router-dom";
 import JoblyApi from "./helpers/api";
 import { useEffect, useState } from "react";
 import decode from "jwt-decode";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 import userContext from "./userContext";
 
@@ -108,7 +109,7 @@ function App() {
     const { username, ...updateData } = editFormData;
     const userFromAPI = await JoblyApi.updateUser(username, updateData);
     setUser((prevUser) => ({
-      ...prevUser,
+      isLoggedIn: true,
       data: {
         ...prevUser.data,
         firstName: userFromAPI.firstName,

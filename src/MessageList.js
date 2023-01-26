@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import Alert from 'react-bootstrap/Alert';
 
 /** List of messages.
  *
@@ -11,10 +12,10 @@ import React from 'react'
 function MessageList({ messages }) {
   return (
     <div className="MessageList">
-      { messages.map(e => (
-        <p key={`Message: ${e}`}>
-          {e}
-        </p>
+      { messages.map(m => (
+        <Alert variant="info" key={`Message: ${m}`}>
+          {m}
+        </Alert>
       ))}
     </div>
   )

@@ -30,7 +30,7 @@ function Nav({ logout }) {
           <NavLink to="/companies">Companies</NavLink>
           <NavLink to="/jobs">Jobs</NavLink>
           <NavLink to="/profile">Profile</NavLink>
-          <button onClick={logout}>{`Logout ${user.data.username}`}</button>
+          <button onClick={logout}>{`Logout: ${user.data.username} (${user.data.firstName})`}</button>
         </>
       }
 
