@@ -44,7 +44,7 @@ function UserForm({ prompts, submit }) {
         errors: errors
       }));
     } else {
-      submit(formData);
+      submit(formData); // TODO: Do the try catch here first.
       setFormData(initialFormState);
     }
   }
@@ -68,6 +68,7 @@ function UserForm({ prompts, submit }) {
               name={p.name}
               onChange={handleChange}
               value={formData[p.name]}
+              type={p.name === 'password' ? 'password' : 'text'}
             />
           </div>
         ))}

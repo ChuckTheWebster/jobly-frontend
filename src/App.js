@@ -22,6 +22,7 @@ const LOCALSTORAGE_TOKEN_KEY = "jobly-token";
  *    -data: User information { username, firstName, lastName, isAdmin, jobs }
  *        where jobs is { id, title, companyHandle, companyName, state }
  *    -isLoggedIn: Boolean for whether a user is logged in
+ * -token: user token
  *
  * App -> { Nav, RoutesList }
  */
@@ -41,12 +42,12 @@ function App() {
   // Update user state whenever token changes
   useEffect(
     function updateUserOnTokenChange() {
-      if (token === null) {
-        setUser(DEFAULT_USER_STATE);
-        return;
-      }
-
       async function fetchAndSetUserInformation() {
+        if (token === null) {
+          setUser(DEFAULT_USER_STATE);
+          return;
+        }
+
         const { username } = decode(token);
 
         let userFromAPI;
@@ -101,7 +102,7 @@ function App() {
   function logout() {
     JoblyApi.token = null;
     setToken(null);
-    localStorage.removeItem(LOCALSTORAGE_TOKEN_KEY);
+    localStorage.removeItem(LOCALSTORAGE_TOKEN_KEY); // TODO: Could move this to useEffect
   }
 
   /** Stores a token in the JoblyApi class, state, and localStorage */
