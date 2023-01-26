@@ -14,7 +14,13 @@ import React, { useState } from "react";
  */
 
 function UserForm({ prompts, submit }) {
-  const [formData, setFormData] = useState({});
+  let initialFormState = {}
+
+  for (let prompt of prompts) {
+    initialFormState[prompt.name] = '';
+  }
+
+  const [formData, setFormData] = useState(initialFormState);
 
   /** Update form input. */
   function handleChange(evt) {
@@ -29,7 +35,7 @@ function UserForm({ prompts, submit }) {
   function handleSubmit(evt) {
     evt.preventDefault();
     submit(formData);
-    setFormData({});
+    setFormData(initialFormState);
   }
 
   return (
@@ -45,6 +51,8 @@ function UserForm({ prompts, submit }) {
           />
         </div>
       ))}
+
+      <button>Submit</button>
     </form>
   );
 }

@@ -59,14 +59,25 @@ class JoblyApi {
     return response.jobs;
   }
 
-  static async loginUser(username, password) {
-    const response = await this.request("/auth/token", {username, password}, "post");
+  /** Authenticate user */
+
+  static async loginUser({ username, password }) {
+    const response = await this.request("auth/token", { username, password }, "post");
     return response.token;
   }
 
-  static async signupUser(username, password, firstName, lastName, email) {
-    const response = await this.request("/auth/register", {username, password, firstName, lastName, email}, "post");
+  /** Register user */
+
+  static async signupUser({ username, password, firstName, lastName, email }) {
+    const response = await this.request("auth/register", { username, password, firstName, lastName, email }, "post");
     return response.token;
+  }
+
+  /** Get a user by username */
+
+  static async getUser(username) {
+    const response = await this.request(`users/${username}`);
+    return response.user;
   }
 
 }

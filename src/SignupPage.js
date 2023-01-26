@@ -1,15 +1,44 @@
 import React from 'react';
 import UserForm from './UserForm';
 
+/** User signup page
+ *
+ * Props:
+ * - signup
+ *
+ * RoutesList -> SignupPage -> UserForm
+ */
+
 function SignupPage({ signup }) {
-  let prompts;
+  const prompts = [
+    {
+      label: 'Username',
+      name: 'username'
+    },
+    {
+      label: 'Password',
+      name: 'password'
+    },
+    {
+      label: 'First Name',
+      name: 'firstName'
+    },
+    {
+      label: 'Last Name',
+      name: 'lastName'
+    },
+    {
+      label: 'Email',
+      name: 'email'
+    }
+  ];
 
   return (
     <div>
       <h1>SignUp</h1>
-      <UserForm submit={ signup } prompts={ prompts }/>
+      <UserForm submit={signup} prompts={prompts} />
     </div>
-  )
+  );
 }
 
-export default SignupPage
+export default SignupPage;
