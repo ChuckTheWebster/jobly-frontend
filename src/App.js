@@ -1,5 +1,5 @@
 import "./App.css";
-import Nav from "./Nav";
+import JoblyNav from "./JoblyNav";
 import RoutesList from "./RoutesList";
 import { BrowserRouter } from "react-router-dom";
 import JoblyApi from "./helpers/api";
@@ -26,7 +26,7 @@ const LOCALSTORAGE_TOKEN_KEY = "jobly-token";
  *    -isLoggedIn: Boolean for whether a user is logged in
  * -token: user token
  *
- * App -> { Nav, RoutesList }
+ * App -> { JoblyNav, RoutesList }
  */
 
 function App() {
@@ -142,7 +142,7 @@ function App() {
     <div className="App">
       <userContext.Provider value={{ user, saveUserEdit }}>
         <BrowserRouter>
-          <Nav logout={logout} />
+          <JoblyNav logout={logout} />
           <RoutesList signup={signup} login={login} />
         </BrowserRouter>
       </userContext.Provider>

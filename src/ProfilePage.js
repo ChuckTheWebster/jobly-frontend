@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react';
 import MessageList from './MessageList';
 import userContext from './userContext';
+import Button from 'react-bootstrap/Button';
 
 /** User profile page with edit form
  *
@@ -95,7 +96,7 @@ function ProfilePage() {
           />
         </div>
 
-        <button>Edit User</button>
+        <Button variant="success" type="submit">Edit User</Button>
       </form>
       <MessageList messages={formData.messages} />
     </div>

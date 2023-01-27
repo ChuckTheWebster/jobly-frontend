@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import MessageList from "./MessageList";
+import Button from 'react-bootstrap/Button';
 
 /** Form with customizable prompts and submit.
  *
@@ -36,6 +37,7 @@ function UserForm({ prompts, submit }) {
   /** Call parent function and clear form. */
   async function handleSubmit(evt) {
     evt.preventDefault();
+    console.log("in handleSubmit")
     const errors = generateInputErrors(); // [errors, ...] []
 
     // Check for input errors (i.e. empty input)
@@ -85,7 +87,12 @@ function UserForm({ prompts, submit }) {
             />
           </div>
         ))}
-        <button>Submit</button>
+
+
+      <Button variant="success" type="submit">Submit</Button>
+
+
+
       </form>
 
       <MessageList messages={formData.messages}/>
