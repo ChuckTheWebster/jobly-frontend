@@ -31,13 +31,15 @@ const LOCALSTORAGE_TOKEN_KEY = "jobly-token";
 
 function App() {
   const [user, setUser] = useState(DEFAULT_USER_STATE);
-  const [token, setToken] = useState(null);
+  const [token, setToken] = useState();
 
   // Attempt to login previous user from localstorage
   useEffect(function checkForTokenOnMount() {
     const tokenFromLocalStorage = localStorage.getItem(LOCALSTORAGE_TOKEN_KEY);
     if (tokenFromLocalStorage) {
       storeToken(tokenFromLocalStorage);
+    } else {
+      setToken(null);
     }
   }, []);
 
@@ -45,12 +47,21 @@ function App() {
   useEffect(
     function updateUserOnTokenChange() {
       async function fetchAndSetUserInformation() {
-        //TODO: if not logged in loading forever
+        // Token has not been explicitly checked for yet
+        if (token === undefined) return;
+
+        // There is no token
         if (token === null) {
-          setUser(DEFAULT_USER_STATE);
+          setUser({
+            data: null,
+            isLoggedIn: false,
+            hasLoaded: true
+          });
+
           return;
         }
 
+        // There is a token
         const { username } = decode(token);
 
         let userFromAPI;
@@ -74,10 +85,10 @@ function App() {
   // On token change, add/remove token to/from local storage.
   useEffect(
     function updateTokenInLocalStorage() {
-      if (token === null) {
-        localStorage.removeItem(LOCALSTORAGE_TOKEN_KEY);
-      } else {
+      if (token) {
         localStorage.setItem(LOCALSTORAGE_TOKEN_KEY, token);
+      } else if (token === null) {
+        localStorage.removeItem(LOCALSTORAGE_TOKEN_KEY);
       }
     },
     [token]
@@ -123,7 +134,9 @@ function App() {
     }));
   }
 
-  if (user.hasLoaded === false) return <h2>Loading...</h2>
+  if (user.hasLoaded === false) {
+    return <h2>Loading...</h2>
+  }
 
   return (
     <div className="App">
