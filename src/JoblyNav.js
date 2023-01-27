@@ -36,7 +36,7 @@ function JoblyNav({ logout }) {
               <Nav.Link href="/profile">Profile</Nav.Link>
               <Button
                 onClick={logout}
-                variant="success"
+                variant="light"
               >{`Logout: ${user.data.username} (${user.data.firstName})`}</Button>
             </>
           )}
