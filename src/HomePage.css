@@ -1,0 +1,51 @@
+.joblyHomeBanner {
+    background-color: rgba(25, 25, 25, .6);
+    color: white;
+    width: 32.5rem;
+    padding: 1.75rem;
+    border-radius: 1rem;
+    position:absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.joblyHomeBanner h1 {
+    font-size: 3rem;
+    font-weight: bold;
+    /* text-transform: uppercase; */
+}
+
+.joblyHomeBanner h2 {
+    font-size: 1.35rem;
+}
+
+.homePageButton {
+    box-shadow: 0 0 .1rem .1rem rgb(255, 255, 255, .5);
+    margin: .25rem;
+}
+
+.welcomeMessage {
+    background-color: rgba(10, 60, 40, .6);
+    width: 26rem;
+    position: absolute;
+    padding: .5rem;
+    border-radius: 1rem;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, 0);
+    animation: .5s infinite ease float;
+}
+
+.welcomeMessage h2 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: white;
+    margin: 0;
+}
+
+@keyframes float {
+    0% {transform: translate(-50%, 0) rotate(-.3deg)}
+    50% {transform: translate(-50%, 0) rotate(.3deg)}
+    100% {transform: translate(-50%, 0) rotate(-.3deg)}
+}

@@ -5,7 +5,6 @@ import { BrowserRouter } from "react-router-dom";
 import JoblyApi from "./helpers/api";
 import { useEffect, useState } from "react";
 import decode from "jwt-decode";
-import 'bootstrap/dist/css/bootstrap.min.css';
 
 import userContext from "./userContext";
 
