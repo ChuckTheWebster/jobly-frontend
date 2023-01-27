@@ -12,6 +12,7 @@ import userContext from "./userContext";
 const DEFAULT_USER_STATE = {
   data: null,
   isLoggedIn: false,
+  hasLoaded: false
 };
 
 const LOCALSTORAGE_TOKEN_KEY = "jobly-token";
@@ -44,6 +45,7 @@ function App() {
   useEffect(
     function updateUserOnTokenChange() {
       async function fetchAndSetUserInformation() {
+        //TODO: if not logged in loading forever
         if (token === null) {
           setUser(DEFAULT_USER_STATE);
           return;
@@ -60,6 +62,7 @@ function App() {
         setUser({
           data: userFromAPI,
           isLoggedIn: true,
+          hasLoaded: true
         });
       }
 
@@ -110,6 +113,7 @@ function App() {
     const userFromAPI = await JoblyApi.updateUser(username, updateData);
     setUser((prevUser) => ({
       isLoggedIn: true,
+      hasLoaded: true,
       data: {
         ...prevUser.data,
         firstName: userFromAPI.firstName,
@@ -118,6 +122,8 @@ function App() {
       },
     }));
   }
+
+  if (user.hasLoaded === false) return <h2>Loading...</h2>
 
   return (
     <div className="App">
