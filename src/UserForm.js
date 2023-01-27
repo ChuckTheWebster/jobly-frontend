@@ -5,6 +5,7 @@ import Form from 'react-bootstrap/Form';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import "./UserForm.css";
 
 /** Form with customizable prompts and submit.
  *
@@ -84,7 +85,7 @@ function UserForm({ prompts, submit }) {
       <Container>
         <Row className='mb-5'>
           <Col md={5} className='mx-auto'>
-            <Form className="Prompts" onSubmit={handleSubmit}>
+            <Form className="UserForm" onSubmit={handleSubmit}>
               {prompts.map((p, i) => (
                 <Form.Group className='mb-3' key={i}>
                   <Form.Label htmlFor={p.name}>{p.label}</Form.Label>
@@ -97,7 +98,7 @@ function UserForm({ prompts, submit }) {
                   />
                 </Form.Group>
               ))}
-              <Button variant="success" type="submit">Submit</Button>
+              <Button className='UserFormButton' variant="success" type="submit">Submit</Button>
             </Form>
           </Col>
         </Row>

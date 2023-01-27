@@ -1,0 +1,7 @@
+.LoginPage {
+    background-color: rgba(25, 25, 25, .65);
+    color: white;
+    width: 32.5rem;
+    padding: 1rem;
+    border-radius: 1rem;
+}
