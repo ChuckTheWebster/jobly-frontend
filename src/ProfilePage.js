@@ -2,6 +2,10 @@ import React, { useContext, useState } from 'react';
 import MessageList from './MessageList';
 import userContext from './userContext';
 import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 /** User profile page with edit form
  *
@@ -41,12 +45,14 @@ function ProfilePage() {
     try {
       await saveUserEdit(formData);
     } catch (err) {
-      errors = err;
+      errors = err.map(e => ({text: e, style: 'danger'}));
     }
 
     setFormData(prevFormData => ({
       ...prevFormData,
-      messages: errors ? errors : ['Updated successfully.']
+      messages: errors ?
+        errors :
+        [{text: 'Updated successfully.', style: 'success'}]
     }))
   }
 
@@ -55,50 +61,58 @@ function ProfilePage() {
     <div>
       <h1>Profile Page</h1>
 
-      <form className='UserEditForm' onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor='usernameInput'>Username</label>
-          <input
-            id='usernameInput'
-            name='username'
-            value={formData.username}
-            disabled
-          />
-        </div>
+      <Container>
+        <Row className='mb-5'>
+          <Col md={5} className='mx-auto'>
+            <Form className='UserEditForm' onSubmit={handleSubmit}>
+              <Form.Group className='mb-3'>
+                <Form.Label htmlFor='usernameInput'>Username</Form.Label>
+                <Form.Control
+                  id='usernameInput'
+                  name='username'
+                  value={formData.username}
+                  disabled
+                />
+              </Form.Group>
+              <Form.Group className='mb-3'>
+                <Form.Label htmlFor='firstNameInput'>First Name</Form.Label>
+                <Form.Control
+                  id='firstNameInput'
+                  name='firstName'
+                  value={formData.firstName}
+                  onChange={handleChange}
+                />
+              </Form.Group>
+              <Form.Group className='mb-3'>
+                <Form.Label htmlFor='lastNameInput'>Last Name</Form.Label>
+                <Form.Control
+                  id='lastNameInput'
+                  name='lastName'
+                  value={formData.lastName}
+                  onChange={handleChange}
+                />
+              </Form.Group>
+              <Form.Group className='mb-3'>
+                <Form.Label htmlFor='emailInput'>Email</Form.Label>
+                <Form.Control
+                  id='emailInput'
+                  name='email'
+                  value={formData.email}
+                  onChange={handleChange}
+                />
+              </Form.Group>
+              <Button variant="success" type="submit">Edit User</Button>
+            </Form>
+          </Col>
+        </Row>
 
-        <div>
-          <label htmlFor='firstNameInput'>First Name</label>
-          <input
-            id='firstNameInput'
-            name='firstName'
-            value={formData.firstName}
-            onChange={handleChange}
-          />
-        </div>
+        <Row>
+          <Col xs={8} className='mx-auto'>
+            <MessageList messages={formData.messages} />
+          </Col>
+        </Row>
+      </Container>
 
-        <div>
-          <label htmlFor='lastNameInput'>Last Name</label>
-          <input
-            id='lastNameInput'
-            name='lastName'
-            value={formData.lastName}
-            onChange={handleChange}
-          />
-        </div>
-
-        <div>
-          <label htmlFor='emailInput'>Email</label>
-          <input
-            id='emailInput'
-            name='email'
-            value={formData.email}
-            onChange={handleChange}
-          />
-        </div>
-
-        <Button variant="success" type="submit">Edit User</Button>
-      </form>
-      <MessageList messages={formData.messages} />
     </div>
 
   );

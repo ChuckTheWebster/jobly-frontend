@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import userContext from './userContext';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
+import Button from 'react-bootstrap/Button';
 
 function HomePage() {
   const { user } = useContext(userContext);
@@ -16,8 +17,8 @@ function HomePage() {
 
       { !user.isLoggedIn &&
         <>
-          <Link to='/login'>Login</Link>
-          <Link to='/signup'>Sign Up</Link>
+          <Button href='/login' variant='dark'>Login</Button>
+          <Button href='/signup' variant='dark'>Sign Up</Button>
         </>
       }
     </div>

@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
-import { NavLink } from "react-router-dom";
-import "./Nav.css";
+// import { NavLink } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
@@ -45,31 +44,6 @@ function JoblyNav({ logout }) {
       </Container>
     </Navbar>
   );
-
-  // return (
-  //   <div className="Nav">
-  //     <Nav.Link href="/">Home</Nav.Link>
-
-  //     {!user.isLoggedIn && (
-  //       <>
-  //         <Nav.Link href="/login">Login</Nav.Link>
-  //         <Nav.Link href="/signup">Sign Up</Nav.Link>
-  //       </>
-  //     )}
-
-  //     {user.isLoggedIn && (
-  //       <>
-  //         <Nav.Link href="/companies">Companies</Nav.Link>
-  //         <Nav.Link href="/jobs">Jobs</Nav.Link>
-  //         <Nav.Link href="/profile">Profile</Nav.Link>
-  //         <Button
-  //           onClick={logout}
-  //           variant="success"
-  //         >{`Logout: ${user.data.username} (${user.data.firstName})`}</Button>
-  //       </>
-  //     )}
-  //   </div>
-  // );
 }
 
 export default JoblyNav;

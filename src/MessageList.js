@@ -4,7 +4,7 @@ import Alert from 'react-bootstrap/Alert';
 /** List of messages.
  *
  * Props:
- * - messages: array of string messages
+ * - messages: array of message objects { text, style }
  *
  * { UserForm, ProfilePage } -> MessageList
  */
@@ -13,8 +13,8 @@ function MessageList({ messages }) {
   return (
     <div className="MessageList">
       { messages.map(m => (
-        <Alert variant="info" key={`Message: ${m}`}>
-          {m}
+        <Alert variant={m.style} key={`Message: ${m.text}`}>
+          {m.text}
         </Alert>
       ))}
     </div>
