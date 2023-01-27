@@ -38,8 +38,9 @@ function SignupPage({ signup }) {
     <div>
       <div className="SignupPage mx-auto mt-4 mb-2">
         <h1>Sign Up</h1>
+        <hr/>
+        <UserForm submit={signup} prompts={prompts} />
       </div>
-      <UserForm submit={signup} prompts={prompts} />
     </div>
   );
 }

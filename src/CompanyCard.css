@@ -1,5 +1,16 @@
-.CompanyCard {
+.card.CompanyCard {
     width: 20rem;
     text-decoration: none;
+    background-color: rgba(25, 25, 25, .8);
 }
 
+.card.CompanyCard img {
+    /* opacity: .8; */
+    border-radius: .5rem;
+}
+
+.card.CompanyCard p,
+.card.CompanyCard .h5,
+.card.CompanyCard hr {
+    color: white;
+}

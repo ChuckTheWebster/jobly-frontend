@@ -1,3 +1,12 @@
 .JobCard {
-    width: 20rem;
+    width: 18rem;
+}
+
+.JobCard small {
+    display: block;
+}
+
+.card.JobCard {
+    background-color: rgba(25, 25, 25, .8);
+    color: white;
 }

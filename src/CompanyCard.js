@@ -15,16 +15,16 @@ import "./CompanyCard.css";
 function CompanyCard({ company }) {
   return (
 
-    <Link to={`${company.handle}`} style={{textDecoration: 'none', color: 'black'}}>
-      <Card className="CompanyCard mx-auto my-3">
-          <Card.Body className="CardBody">
-            {company.logoUrl && <Card.Img className="mb-4" variant="top" src={company.logoUrl} alt={company.name}/>}
-            <Card.Title >{company.name}</Card.Title>
-            <hr/>
-            <Card.Text>{company.description}</Card.Text>
-          </Card.Body>
-      </Card>
-    </Link>
+    <Card className="CompanyCard mx-auto my-3">
+      <Link to={`${company.handle}`} style={{ textDecoration: 'none', color: 'black' }}>
+        <Card.Body className="CardBody">
+          {company.logoUrl && <Card.Img className="mb-4" variant="top" src={company.logoUrl} alt={company.name} />}
+          <Card.Title >{company.name}</Card.Title>
+          <hr />
+          <Card.Text>{company.description}</Card.Text>
+        </Card.Body>
+      </Link>
+    </Card>
   );
 }
 

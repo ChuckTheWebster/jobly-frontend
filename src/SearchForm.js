@@ -5,6 +5,7 @@ import InputGroup from "react-bootstrap/InputGroup";
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import './SearchForm.css';
 
 const DEFAULT_SEARCH_FORM_DATA = { searchTerm: '' };
 
@@ -48,7 +49,7 @@ function SearchForm({ search }) {
               value={ formData.searchTerm }
               aria-label="Search Term"
             />
-            <Button>Search</Button>
+            <Button className='searchBtn'>Search</Button>
             </InputGroup>
           </Form>
         </Col>

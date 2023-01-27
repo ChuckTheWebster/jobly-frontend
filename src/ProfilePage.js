@@ -3,9 +3,7 @@ import MessageList from './MessageList';
 import userContext from './userContext';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
+import './ProfilePage.css';
 
 /** User profile page with edit form
  *
@@ -45,74 +43,64 @@ function ProfilePage() {
     try {
       await saveUserEdit(formData);
     } catch (err) {
-      errors = err.map(e => ({text: e, style: 'danger'}));
+      errors = err.map(e => ({ text: e, style: 'danger' }));
     }
 
     setFormData(prevFormData => ({
       ...prevFormData,
       messages: errors ?
         errors :
-        [{text: 'Updated successfully.', style: 'success'}]
-    }))
+        [{ text: 'Updated successfully.', style: 'success' }]
+    }));
   }
 
   return (
 
-    <div>
-      <h1>Profile Page</h1>
+    <div className='ProfilePage mx-auto mt-4 mb-2'>
+      <h1>Profile</h1>
+      <hr/>
 
-      <Container>
-        <Row className='mb-5'>
-          <Col md={5} className='mx-auto'>
-            <Form className='UserEditForm' onSubmit={handleSubmit}>
-              <Form.Group className='mb-3'>
-                <Form.Label htmlFor='usernameInput'>Username</Form.Label>
-                <Form.Control
-                  id='usernameInput'
-                  name='username'
-                  value={formData.username}
-                  disabled
-                />
-              </Form.Group>
-              <Form.Group className='mb-3'>
-                <Form.Label htmlFor='firstNameInput'>First Name</Form.Label>
-                <Form.Control
-                  id='firstNameInput'
-                  name='firstName'
-                  value={formData.firstName}
-                  onChange={handleChange}
-                />
-              </Form.Group>
-              <Form.Group className='mb-3'>
-                <Form.Label htmlFor='lastNameInput'>Last Name</Form.Label>
-                <Form.Control
-                  id='lastNameInput'
-                  name='lastName'
-                  value={formData.lastName}
-                  onChange={handleChange}
-                />
-              </Form.Group>
-              <Form.Group className='mb-3'>
-                <Form.Label htmlFor='emailInput'>Email</Form.Label>
-                <Form.Control
-                  id='emailInput'
-                  name='email'
-                  value={formData.email}
-                  onChange={handleChange}
-                />
-              </Form.Group>
-              <Button variant="success" type="submit">Edit User</Button>
-            </Form>
-          </Col>
-        </Row>
+      <Form className='UserEditForm' onSubmit={handleSubmit}>
+        <Form.Group className='mb-3'>
+          <Form.Label htmlFor='usernameInput'>Username</Form.Label>
+          <Form.Control
+            id='usernameInput'
+            name='username'
+            value={formData.username}
+            disabled
+          />
+        </Form.Group>
+        <Form.Group className='mb-3'>
+          <Form.Label htmlFor='firstNameInput'>First Name</Form.Label>
+          <Form.Control
+            id='firstNameInput'
+            name='firstName'
+            value={formData.firstName}
+            onChange={handleChange}
+          />
+        </Form.Group>
+        <Form.Group className='mb-3'>
+          <Form.Label htmlFor='lastNameInput'>Last Name</Form.Label>
+          <Form.Control
+            id='lastNameInput'
+            name='lastName'
+            value={formData.lastName}
+            onChange={handleChange}
+          />
+        </Form.Group>
+        <Form.Group className='mb-3'>
+          <Form.Label htmlFor='emailInput'>Email</Form.Label>
+          <Form.Control
+            id='emailInput'
+            name='email'
+            value={formData.email}
+            onChange={handleChange}
+          />
+        </Form.Group>
+        <Button className='UserEditFormButton' variant="success" type="submit">Edit User</Button>
+      </Form>
 
-        <Row>
-          <Col xs={8} className='mx-auto'>
-            <MessageList messages={formData.messages} />
-          </Col>
-        </Row>
-      </Container>
-
+      <MessageList messages={formData.messages} />
     </div>
 
   );

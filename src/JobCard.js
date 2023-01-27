@@ -16,13 +16,12 @@ function JobCard({ job }) {
     <Card className="JobCard mx-auto my-3">
       <Card.Body>
         <Card.Title>{job.title}</Card.Title>
+        <hr/>
         <Card.Text>
           {job.companyName}
         </Card.Text>
         <Card.Text>
           <small>Salary: {job.salary}</small>
-        </Card.Text>
-        <Card.Text>
           <small>Equity: {job.equity}</small>
         </Card.Text>
       </Card.Body>

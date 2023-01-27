@@ -4,6 +4,7 @@ import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
+import './JoblyNav.css';
 
 import userContext from "./userContext";
 
@@ -35,6 +36,7 @@ function JoblyNav({ logout }) {
               <Nav.Link href="/jobs">Jobs</Nav.Link>
               <Nav.Link href="/profile">Profile</Nav.Link>
               <Button
+                className='logoutBtn'
                 onClick={logout}
                 variant="light"
               >{`Logout: ${user.data.username} (${user.data.firstName})`}</Button>

@@ -1,9 +1,6 @@
 .UserForm {
-    background-color: rgba(25, 25, 25, .65);
-    color: white;
-    width: 32.5rem;
+    width: 100%;
     padding: 1.75rem;
-    border-radius: 1rem;
 }
 
 .UserFormButton {

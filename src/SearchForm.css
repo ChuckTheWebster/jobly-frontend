@@ -1,0 +1,19 @@
+.btn.searchBtn {
+    background-color: rgba(10, 60, 40, .8);
+    border: none;
+}
+
+.btn.searchBtn:hover {
+    color: greenyellow;
+    background-color: rgba(10, 60, 40, .8)
+}
+
+#search {
+    background-color: rgba(25, 25, 25, .95);
+    border: none;
+    color: white;
+}
+
+#search:focus {
+    box-shadow: none;
+}

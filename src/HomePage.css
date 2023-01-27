@@ -1,5 +1,5 @@
 .joblyHomeBanner {
-    background-color: rgba(25, 25, 25, .6);
+    background-color: rgba(25, 25, 25, .8);
     color: white;
     width: 32.5rem;
     padding: 1.75rem;
@@ -26,7 +26,7 @@
 }
 
 .welcomeMessage {
-    background-color: rgba(10, 60, 40, .6);
+    background-color: rgba(10, 60, 40, .8);
     width: 26rem;
     position: absolute;
     padding: .5rem;

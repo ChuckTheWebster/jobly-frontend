@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import JobList from "./JobList";
 import { useParams } from "react-router-dom";
 import JoblyApi from "./helpers/api";
+import './CompanyDetailPage.css'
 
 /** Detail page for a company
  *
@@ -46,8 +47,12 @@ function CompanyDetailPage() {
 
   return (
     <div className="CompanyDetailPage">
-      <h2>{company.data.name}</h2>
-      <p>{company.data.description}</p>
+
+      <div className='companyInfoHeading mx-auto'>
+        <h2>{company.data.name}</h2>
+        <p>{company.data.description}</p>
+      </div>
+
       <JobList jobs={company.data.jobs} />
     </div>
   );

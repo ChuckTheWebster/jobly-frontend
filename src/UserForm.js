@@ -2,9 +2,6 @@ import React, { useState } from "react";
 import MessageList from "./MessageList";
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
 import "./UserForm.css";
 
 /** Form with customizable prompts and submit.
@@ -60,7 +57,7 @@ function UserForm({ prompts, submit }) {
     } catch (err) {
       setFormData(prevFormData => ({
         ...prevFormData,
-        messages: err.map(e => ({text: e, style: 'danger'}))
+        messages: err.map(e => ({ text: e, style: 'danger' }))
       }));
 
       return;
@@ -81,35 +78,24 @@ function UserForm({ prompts, submit }) {
   }
 
   return (
-    <>
-      <Container>
-        <Row className='mb-5'>
-          <Col md={5} className='mx-auto'>
-            <Form className="UserForm" onSubmit={handleSubmit}>
-              {prompts.map((p, i) => (
-                <Form.Group className='mb-3' key={i}>
-                  <Form.Label htmlFor={p.name}>{p.label}</Form.Label>
-                  <Form.Control
-                    id={p.name}
-                    name={p.name}
-                    onChange={handleChange}
-                    value={formData[p.name]}
-                    type={p.name === 'password' ? 'password' : 'text'}
-                  />
-                </Form.Group>
-              ))}
-              <Button className='UserFormButton' variant="success" type="submit">Submit</Button>
-            </Form>
-          </Col>
-        </Row>
-
-        <Row>
-          <Col xs={8} className='mx-auto'>
-            <MessageList messages={formData.messages} />
-          </Col>
-        </Row>
-      </Container>
-    </>
+      <>
+        <Form className="UserForm" onSubmit={handleSubmit}>
+          {prompts.map((p, i) => (
+            <Form.Group className='mb-3' key={i}>
+              <Form.Label htmlFor={p.name}>{p.label}</Form.Label>
+              <Form.Control
+                id={p.name}
+                name={p.name}
+                onChange={handleChange}
+                value={formData[p.name]}
+                type={p.name === 'password' ? 'password' : 'text'}
+              />
+            </Form.Group>
+          ))}
+          <Button className='UserFormButton' variant="success" type="submit">Submit</Button>
+        </Form>
+        <MessageList messages={formData.messages} />
+      </>
   );
 }
 

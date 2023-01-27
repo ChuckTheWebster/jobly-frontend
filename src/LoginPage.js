@@ -1,6 +1,6 @@
 import React from 'react';
 import UserForm from './UserForm';
-import "./LoginPage.css"
+import "./LoginPage.css";
 
 /** User login page
  *
@@ -27,8 +27,9 @@ function LoginPage({ login }) {
     <div>
       <div className="LoginPage mx-auto mt-4 mb-2">
         <h1>Login</h1>
+        <hr/>
+        <UserForm submit={login} prompts={prompts} />
       </div>
-      <UserForm submit={login} prompts={prompts} />
     </div>
   );
 }
